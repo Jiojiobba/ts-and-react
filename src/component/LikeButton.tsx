@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useState, useEffect, useContext } from 'react'
+import { ThemeContext } from '../App'
+//useContext是一个function，接受参数：已经创建的ThemeContext
 const LikeButton :React.FC = ()=>{
+    const theme = useContext(ThemeContext)
+    console.log(theme)
+    const style ={
+        background: theme.background,
+        color : theme.color
+    }
     const [like, setLike] = useState(0)//数组解析，此时typeInferance会使得like自动获得number的类型，setLike也只能传入number类型
     //里面的值可以是数字、字符串、布尔值等等，但class里面的一定是对象
     //useState返回值是个array，0是点赞此次数
@@ -14,7 +21,7 @@ const LikeButton :React.FC = ()=>{
     
  return (
         <>
-        <button onClick={()=>{setLike(like + 1)}}>
+        <button style={style} onClick={()=>{setLike(like + 1)}}>
             {like}👍
         </button>
         <button onClick={()=>{setOn(!on)}}>
